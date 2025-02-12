@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Exam: {{ exam.title }}</h2>
+<p>Description: {{ exam.description }}</p>
+<p>Course: {{ exam.course.name }}</p>  <!-- Assuming course has a name attribute -->
+<p>Date: {{ exam.exam_date }}</p>
+<p>Duration: {{ exam.duration }} minutes</p>
+
+<h3>Questions</h3>
+<ul>
+    {% for question in questions %}
+    <li>
+        <strong>{{ question.text }}</strong><br>
+        a) {{ question.option_a }}<br>
+        b) {{ question.option_b }}<br>
+        c) {{ question.option_c }}<br>
+        d) {{ question.option_d }}<br>
+        <em>Correct Answer: {{ question.correct_option }}</em><br>
+        <em>Difficulty: {{ question.difficulty }}</em>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

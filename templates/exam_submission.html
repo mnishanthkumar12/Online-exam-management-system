@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="results-container">
+    <h2>Exam Submitted!</h2>
+    <p>Your score: {{ score }}/{{ questions|length }}</p>
+    <ul>
+        {% for question in questions %}
+        <li>
+            <strong>{{ loop.index }}. {{ question.text }}</strong>
+            <br>
+            Correct Answer: {{ question.answer }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

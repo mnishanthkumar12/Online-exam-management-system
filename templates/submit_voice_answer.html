@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voice Response Submission</title>
+</head>
+<body>
+    <h1>Submit Your Voice Responses</h1>
+    
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Display Transcript and Scores -->
+    {% if transcript %}
+        <h2>Transcription Result:</h2>
+        <p>{{ transcript }}</p>
+    {% endif %}
+
+    {% if total_score %}
+        <h2>Total Score:</h2>
+        <p>{{ total_score }} (Stage 1 + Stage 2)</p>
+    {% endif %}
+
+    <!-- Form to Upload Audio -->
+    <form action="/submit_voice_answer" method="post" enctype="multipart/form-data">
+        <label for="file">Choose an audio file to upload:</label>
+        <input type="file" name="file" id="file" accept="audio/*" required>
+        <button type="submit">Upload and Transcribe</button>
+    </form>
+</body>
+</html>

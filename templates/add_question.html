@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Add Questions to {{ exam.title }}</h2>
+<form method="POST" action="{{ url_for('add_question', exam_id=exam.id) }}">
+    {{ form.hidden_tag() }}
+    
+    <div class="form-group">
+        {{ form.text.label(class="form-label") }}
+        {{ form.text(class="form-control", placeholder="Enter question text") }}
+    </div>
+    <div class="form-group">
+        {{ form.options.label(class="form-label") }}
+        {{ form.options(class="form-control", placeholder="Enter options (comma separated)") }}
+    </div>
+    <div class="form-group">
+        {{ form.answer.label(class="form-label") }}
+        {{ form.answer(class="form-control", placeholder="Enter correct answer") }}
+    </div>
+    <div class="form-group">
+        {{ form.difficulty.label(class="form-label") }}
+        {{ form.difficulty(class="form-control", placeholder="Enter difficulty level") }}
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Add Question</button>
+</form>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Recorder voice exam </title>
+    <!-- Load jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+ 
+
+    <button id="start-record">Start Recording</button>
+    <button id="stop-record" disabled>Stop Recording</button>
+    <audio id="audio-playback" controls></audio>
+
+    <!-- Link to your main.js file -->
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+</body>
+</html> {% endcomment %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Exam</title>
+</head>
+<body>
+    <h1>Welcome to the Voice Exam</h1>
+    <form method="POST" action="/start_exam">
+        <button type="submit">Start Exam</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Login - Online Exam Management System{% endblock %}
+{% block content %}
+<div>
+    {% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<div class="login">
+    <h2 class="text-center">Login</h2>
+    <form method="POST" action="{{ url_for('login') }}">
+        {{ form.hidden_tag() }}  <!-- Important for CSRF protection -->
+        
+        <div class="form-group">
+            {{ form.username.label }} 
+            {{ form.username(class="form-control", placeholder="Enter your username") }}
+            {% if form.username.errors %}
+            <span class="text-danger">{{ form.username.errors[0] }}</span>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.password.label }} 
+            {{ form.password(class="form-control", placeholder="Enter your password") }}
+            {% if form.password.errors %}
+            <span class="text-danger">{{ form.password.errors[0] }}</span>
+            {% endif %}
+        </div>
+        
+        <div class="form-check">
+            {{ form.cookie(class="form-check-input") }}
+            {{ form.cookie.label(class="form-check-label") }}
+        </div>
+
+        <div class="form-group">
+            <label for="role">Login as:</label>
+            <select class="form-control" id="role" name="role">
+                <option value="student">Student</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+</div>
+{% endblock %}

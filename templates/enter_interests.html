@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Enter Your Interests</h2>
+    <form method="POST" action="{{ url_for('enter_interests') }}">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+            {{ form.interests.label(class="form-label") }}
+            <div class="interests-container">
+                {{ form.interests(id='interests', class='form-control') }}
+            </div>
+            {% if form.interests.errors %}
+                <div class="text-danger">
+                    {% for error in form.interests.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group mt-3">
+            {{ form.language.label(class="form-label") }}
+            {{ form.language(class="form-control") }}
+            {% if form.language.errors %}
+                <div class="text-danger">
+                    {% for error in form.language.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mt-3">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<script>
+$(document).ready(function() {
+    $('#interests').select2({
+        placeholder: 'Select your interests',
+        tags: true, // Allows for custom entries if needed
+        width: '100%', // Adjust width as needed
+        allowClear: true // Adds a clear button
+    });
+});
+</script>
+{% endblock %}

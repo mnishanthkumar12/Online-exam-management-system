@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="exam-container">
+    <h2>{{ exam.exam_title }}</h2>
+    <form method="post">
+        <div class="question-text">
+            {% if user_selected_language == 'en' %}
+                <div class="text-language text-english">
+                    {{ question.text }}
+                </div>
+            {% else %}
+                <div class="text-language text-english">
+                    <strong>English:</strong> {{ question.text }}
+                </div>
+                <div class="text-language text-{{ user_selected_language }}">
+                    <strong>{{ user_selected_language|capitalize }}:</strong> {{ translated_question_text }}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="question-card" data-question-id="{{ question.id }}">
+            <ul class="answer-options">
+                {% for option, translated_option in options_with_translations %}
+                <li class="answer-option">
+                    <label>
+                        <input type="radio" name="answer" value="{{ option }}" required>
+                        {% if user_selected_language == 'en' %}
+                            <div class="option-language option-english">{{ option }}</div>
+                        {% else %}
+                            <div class="option-language option-english">
+                                <strong>English:</strong> {{ option }}
+                            </div>
+                            <div class="option-language option-{{ user_selected_language }}">
+                                <strong>{{ user_selected_language|capitalize }}:</strong> {{ translated_option }}
+                            </div>
+                        {% endif %}
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <input type="hidden" name="question_id" value="{{ question.id }}">
+
+        <!-- Navigation buttons -->
+        <div class="navigation-buttons">
+            {% if index > 0 %}
+                <a href="{{ url_for('take_exam', exam_id=exam.id, index=index-1) }}" class="btn-navigation">Previous</a>
+            {% endif %}
+            <button type="submit" class="btn-navigation">
+                {% if index + 1 == total %}Submit Exam{% else %}Next{% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

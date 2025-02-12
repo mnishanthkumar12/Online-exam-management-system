@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Exams List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Course</th>
+            <th>Date</th>
+            <th>Duration</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for exam in exams %}
+        <tr>
+            <td>{{ exam.title }}</td>
+            <td>{{ exam.description }}</td>
+            <td>{{ exam.course.name }}</td>  <!-- Assuming course has a name attribute -->
+            <td>{{ exam.exam_date }}</td>
+            <td>{{ exam.duration }} minutes</td>
+            <td><a href="{{ url_for('view_exams', exam_id=exam.id) }}">View</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

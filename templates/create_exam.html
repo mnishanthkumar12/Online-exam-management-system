@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Create a New Exam</h1>
+
+<form method="POST" action="{{ url_for('create_exam') }}">
+    {{ form.hidden_tag() }}
+
+    <div>
+        {{ form.title.label }}
+        {{ form.title() }}
+        {% if form.title.errors %}
+            <div class="error">{{ form.title.errors[0] }}</div>
+        {% endif %}
+    </div>
+
+    <div>
+        {{ form.description.label }}
+        {{ form.description(rows=3) }}
+        {% if form.description.errors %}
+            <div class="error">{{ form.description.errors[0] }}</div>
+        {% endif %}
+    </div>
+
+    <div>
+        {{ form.course_id.label }}
+        {{ form.course_id() }}
+        {% if form.course_id.errors %}
+            <div class="error">{{ form.course_id.errors[0] }}</div>
+        {% endif %}
+    </div>
+
+    <div>
+        {{ form.exam_date.label }}
+        {{ form.exam_date() }}
+        {% if form.exam_date.errors %}
+            <div class="error">{{ form.exam_date.errors[0] }}</div>
+        {% endif %}
+    </div>
+
+    <div>
+        {{ form.duration.label }}
+        {{ form.duration() }}
+        {% if form.duration.errors %}
+            <div class="error">{{ form.duration.errors[0] }}</div>
+        {% endif %}
+    </div>
+
+    <div>
+        <h3>Questions</h3>
+        {% for question_form in form.questions %}
+            <div>
+                {{ question_form.text.label }}
+                {{ question_form.text() }}
+                {% if question_form.text.errors %}
+                    <div class="error">{{ question_form.text.errors[0] }}</div>
+                {% endif %}
+            </div>
+            <div>
+                {{ question_form.options.label }}
+                {{ question_form.options() }}
+                {% if question_form.options.errors %}
+                    <div class="error">{{ question_form.options.errors[0] }}</div>
+                {% endif %}
+            </div>
+            <div>
+                {{ question_form.answer.label }}
+                {{ question_form.answer() }}
+                {% if question_form.answer.errors %}
+                    <div class="error">{{ question_form.answer.errors[0] }}</div>
+                {% endif %}
+            </div>
+            <div>
+                {{ question_form.difficulty.label }}
+                {{ question_form.difficulty() }}
+                {% if question_form.difficulty.errors %}
+                    <div class="error">{{ question_form.difficulty.errors[0] }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+{% endblock %}

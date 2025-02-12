@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Exam Questions</h1>
+    <form action="/submit_exam" method="POST">
+        <ul>
+            {% for question in questions %}
+                <li>{{ question.text }}</li>
+            {% endfor %}
+        </ul>
+        <button type="submit">Submit Exam</button>
+    </form>
+{% endblock %}

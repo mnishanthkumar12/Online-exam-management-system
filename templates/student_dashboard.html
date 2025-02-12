@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<h1>Student Dashboard</h1>
+<p>Welcome, {{ current_user.username }}!</p>
+<p>Here are the exams based on your interests:</p>
+{% if exams %}
+    <ul>
+        {% for exam in exams %}
+            <li>
+                <a href="{{ url_for('take_exam', exam_id=exam.id) }}">{{ exam.exam_title }}</a><br>
+                Description: {{ exam.description }}<br>
+                Exam Date: {{ exam.exam_date.strftime('%Y-%m-%d') }}<br>
+                Duration: {{ exam.duration }} minutes
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No exams available for your interests.</p>
+{% endif %}
+{% endblock %}
